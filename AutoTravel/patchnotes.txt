@@ -1,0 +1,328 @@
+Version 3.5.6
+* Updated it to work better with current patch (1.5).
+* Fixed bug with broken main menu.
+* Minor changes to take advantage of some MapLibrary optimizations.
+
+Version 3.5.5b
+* Oops! Previous version broke click-zooming. Fixed now.
+
+Version 3.5.5
+* Fixed bug with showing wrong poi list.
+* Fixed bug with mouse wheel zoom (Thanks Legorol!)
+* Added feature: camera follow mode is set to never while autotraveling. (So you can look at the scenery!)
+
+Version 3.5.4
+* Fixed bug related to showing wrong poi submenus.
+* Won't try to add POI:s to menu beyond 32 (the blizzard limit).
+
+Version 3.5.3
+* Huge optimizations in reduced garbage collection.
+* Faction points are now marked on map by being slightly larger.
+* Added "dead" faction. This signifies points that only be passed when dead.
+Useful for making paths that only go from graveyard to corpse, possible through
+dangerous territory.
+
+Version 3.5.2
+* Added faction points. If you set a point to horde, no alliance character will
+try to pass through it.
+* Fixed the aspect bug when ui scaling differed from 100%.
+* Fixed some random bugs.
+* Updated to work with MapLibrary 1.1.0.
+* Map zoom always follows player now turns itself on
+starting and resuming paths, and turns itself off when scrolling the map.
+* /at go now also applies to subzones and zones. /at go bar will go to barrens.
+* /at reset now resets the mapframe location and size.
+* Added global / local POI sub menus.
+* Less garbage created by mapframe... I suspect so, atleast.
+* Mouse wheel zoom still requires that the mapframe is focused, if anyone
+can find a workaround for this, I'd be grateful.
+
+Version 3.5.1
+* Just some bug fixes, hopefully it will fix the problems with 3.5.0.
+(You need to get the new version of MapLibrary as well!)
+
+Version 3.5.0
+* Added correct aspect ratio to map frame
+* Developed a stand alone library: MapLibrary and am using
+that now.
+* Using MapLibrary gives a huge improvement in measuring distances, so the
+ETA will be more steady when turning.
+* Changed distance to be relative to movement speed.
+* Some localization updates.
+* AutoTravelCorpse 1.0.5 will not work with this version! (Quick fix for that though)
+
+Version 3.4.0
+* Some localization fixes with german umlauts.
+* Added option to zoom with mouse wheel.
+* Added option to only show local POI in menu.
+* Added option to allow partial matchings. So "/at go i" will match Inn
+(and anything else that starts with i).
+* Decreased the distance being at a point from 2 to 1 yard.
+This might lead to annoying stops in walking, so please report any bugs.
+* REMOVED AutoTravelCorpse. It is a separate addon now.
+
+* About the map frame: If you place it too low on the screen, the dropdowns
+won't work, since they need a certain amount of screen space.
+
+Version 3.3.12
+* French localization added. Thanks Hildebrand.
+
+Version 3.3.11b
+* Whoops! Typo fixed.
+
+Version 3.3.11
+* Minor bug fixes related to POI.
+* Minor bug fixes related to AutoTravelCorpse.
+
+Version 3.3.10c
+* Some more bug fixes related to POI.
+
+Version 3.3.10b
+* Oops! POI menu got even worse! Hopefully fixed for real this time!
+
+Version 3.3.10
+* Fixed a bug in the POI menu.
+* Lowered framerate requirement to 5 fps.
+
+Version 3.3.9
+* Improved the initial turning when following a path.
+* Stopping movement if framerate is below 10 fps.
+* Added a bindable POI menu.
+* Increased zoom to 32x
+* Improved POI. You can now create POI:s like "Mail,Bank,Repair" or "Taxi,Trainer|Hunter" or any combination like that. That point will then match any of those. /at go hunter and /at go trainer will now also both match Trainer|Hunter
+
+Version 3.3.8
+* Fixed a bug related to the mapframe not choosing the right zone on startup.
+* Fixed a bug related to the mapzoom follows player.
+* Added an always run to corpse-setting to AutoTravelCorpse. /atc for info.
+
+Version 3.3.7
+* Fixed the bug with map not working.
+(Seems to have been related to the new patch. Just noticed it now since I am
+in europe)
+* Minor german localization fixes.
+* Probably some more minor bug.
+
+Version 3.3.6
+* Added german localization, thanks to "andrej" for the translation
+(german version will also use meters instead of yards).
+* Some map-related bugfixes.
+* Minor AutoTravelCorpse-improvements.
+* Added alpha to the map. Usage: /at mapalpha <percentage>
+
+Version 3.3.5
+* Some bug fixes.
+* Added party icons to the map frame.
+* Fixed AutoTravelCorpse. The only time it will
+do something automatically is when you die while following a path, since that
+would be the only time you might not be paying attention and may need it.
+
+Version 3.3.4
+* Lots of bug fixes!
+* Added option of always focus on player.
+
+Version 3.3.3
+* Fixed the scaling issue.
+* Added corpse to map.
+* Dramatically decreased creation of garbage by rewriting a lot of the vector
+math.
+
+Version 3.3.2
+* Prettyfied the map. I even drew a resize button!
+* Changed zooming (left click zooms in, right click zooms out).
+* When following a path, player icon will always be in focus.
+* A few minor bug fixes related to map not refreshing.
+
+Version 3.3.1b
+* Very minor bug fix. Selecting zone from dropdown didn't work as intended.
+
+Version 3.3.1
+* A LOT of improvements on the map frame.
+* General speedups and bugfixes.
+* Made the popup menu more friendly.
+* Some bugfixes to AutoTravelCorpse.
+
+Version 3.3.0
+* Made my own map frame. Should work fine. Needs testing. This is of course a huge change so all the subchanges won't be listed.
+* This of course means that it now works fine together with flightpath (and probably more map based addons)
+
+Version 3.2.3
+* Developers API modified. Events OnWaypointReached and OnInitialized added,
+  see updated AutoTravelEmote and AutoTravelCorpse for example.
+* Reworked turning, should stop much more often now, for better precision.
+* Moved (and improved?) Corpse-related code to an external Addon (included!)
+  This needs some serious testing though!
+
+Version 3.2.2
+* Fixed the DisableAutoRoad on adding points bug.
+* Developers API done! See readme for more information
+
+Version 3.2.1
+* Removed a confusing debug message.
+* Fixed a bug with corpseresume.
+* Fixed a bug with the POI menu.
+* Added option to fade non POI
+* Added option to hide points outside zone
+
+Version 3.2.0
+* Added roads to map view!
+* Only autorevive if have path to resume.
+* Removed fading of points.
+* Organized menu.
+* More detailed readme.
+* Removed /at short
+* Changed /at go to instead work on POI. I.e. /at go Inn
+* Removed unnecessary key bindings.
+* Categories of POI, usage: Name POI:s "Trainer|Hunter" and "Trainer|Skinning" and the POI menu will make a sub menu called "Trainer" which contains these.
+* Decreased calibration range from 20 yards to 5 yards.
+* As always, some minor bug fixes.
+
+Version 3.1.6
+* Added option of hiding points with only two roads. Typically these are in the middle of a road and not desired end points.
+* Fixed small typo that caused a big bug.
+
+Version 3.1.5
+* Hopefully better readme text
+* Fixed small bug with calibration
+* Set alpha values on points so that POI appear more solid than regular points (optional).
+
+Version 3.1.4 pi edition
+* Sort items in menus lexicographically.
+* Minor bugfix.
+* Dos style text files
+
+Version 3.1.3
+* Improved menus slightly.
+* Added ETA
+
+Version 3.1.2
+* Made settings a submenu in the main menu
+* Modified turning so that it is relative to walking speed
+* Added option of moving point when adding too close to an old point.
+
+Version 3.1.1
+* Fixed bug with showing wrong subzones
+* Fixed bug with autorevive setting
+* Closing map when starting walk is not a setting
+* Added tooltip for POI
+* Control click on map deletes a point
+* Shift click on map walks to point
+
+Version 3.1.0
+* Added points of interests
+* Changed map point UI. Right click on a point for menu.
+* Redid the entire main UI. Right click for menu.
+* Improved path following algorithm.
+* Added corpse-run - runs to corpse automatically when died.
+* Added corpse-resume - resumes original path when alive again.
+* Added auto-revive - revives automatically when near corpse.
+* Lots of requested features were added.
+
+Version 3.0.6
+* Debugging version! More debugging output.
+* Removed the precalculated translations, since I realised that it would be language-determined. Will implement it again later, but with zone ids instead of zone names.
+* Some minor bug fixes.
+
+Version 3.0.5
+* Fixed a typo, which may have caused a bug. Best to be on the safe side.
+* Recoded the mapping code to always try to get a valid zone when walking.
+* Added a few static translations to a seperate file. The idea is to add more zones to this, as more zones get calibrated. If some zone is missing here, it's because no one has calibrated it and sent it to me!
+
+Version 3.0.4
+* Fixed a bug that occured when deleting points.
+
+Version 3.0.3
+* Found a silly bug that changed the size of the go-button when clicked.
+
+Version 3.0.2
+* A few small but important bugfixes.
+* Added switch for showing and hiding map points.
+
+Version 3.0.1
+* When following a path, the turning algorithm was crappy. Now it's much better, I can't even find anything to improve.
+* Now possible to import points and roads from version 3. This is new functionaltily though. Backup your SavedVariables.lua and let me know if something didn't work. Note that you won't see your old points until you've calibrated that zone. See description for more details.
+* Minor bugfixes.
+
+Version 3
+* Completely redesigned the code!
+* You no longer need the autotravel move forward keybinding
+* You no longer need to worry about walking between zones at all, the addon now treats all zones as one big zone.
+* Reloading the ui will no longer affect the addon.
+* It should be faster, and thus nicer to the framerate.
+* Settings are stored per character but points and roads are stored per account and computer.
+* Autoroad doesn't add a road if the distance to the nearest point is greater than 200 yards.
+* Dropdown menus for choosing destination.
+* Upgraded the number of visible points to 1000. You can add more points, but only 1000 will actually be shown.
+* Ability to toggle gui visibility.
+* Cool distance and speed information when following a path!
+
+Version 2.0.3
+* Changed some colours. Still not completely happy with it, I am a coder, not an artist. Feel free to modify, test, and send me the results!
+* Some minor bugfixes.
+* Now when hovering a point, the subzone will be displayed under the controller buttons.
+* Removed manually adding points!
+* /at go <zone name> [<subzone name>] will start traveling to the nearest point in that zone. Se description for details.
+* In addition to that, /at short <shortname>=<fullname> will setup a shortcut for you. See description for details.
+
+Version 2.0.2
+* Now when hovering a point, all connected points will be highlighted.
+
+Version 2.0.1
+* Hopefully fixed the Stack overflow that occurs sometimes when dealing with points. If you see it again, let me know!
+* Fixed the problem with getting stuck. If getting stuck now, the addon will auomatically pause the path.
+* Hopefully fixed the problem with running in circles around waypoint. This mostly happened in city zones such as Ironforge. It will circle a point for at most 3 seconds.
+
+Version 2.0
+* Changed the datastructure for storing the points and roads. The old
+structure was easily corrupted. The addon will automatically convert to
+the new format, but corrupted roads will probably be broken and have to be
+manually fixed.
+* Fixed a bug that caused the player to turn around when changing zones.
+* Removed the stop-button, since a pause does the same thing, but also
+allows a resume.
+* When adding a waypoint close to another point, it will move the old one
+instead of showing an error message.
+* And as usual various bugfixes.
+
+Version 1.2.2
+* Some very IMPORTANT bugfixes. Go get it! I suggest doing an /at test if you are upgrading from an old version.
+
+Version 1.2.1
+* Some bugfixes.
+
+Version 1.2
+* Some bugfixes.
+* Movable controller button on map.
+* Function to add points manually added.
+* Autoroading - make roads automatically when adding points.
+* Pause / resume walking
+* Added localization. Translators go ahead and do your localization and send it to me!
+* Some more keybindings.
+
+Version 1.1.5
+* Just bugfixes.
+
+Version 1.1.4
+* More small fixes.
+* You can set up 'add point' and stuff from KeyBindings.
+
+Version 1.1.3
+* Small, but important bug fixes concerning zone changing.
+
+Version 1.1.2
+* Fixed the tostring-problem... AGAIN! Sorry for letting it get past me once.
+* Changed point/road management, see description.
+* Changed so that waypoints between zones will only be added if you are actually walking. I.e. not flying or going by boat.
+
+Version 1.1.1
+* I used GetZoneText() instead of GetRealZoneText(). Big mistake, it screwed up zones where these two functions had different values. (Like Ironforge!)
+
+Version 1.1
+* Various bug fixes.
+* Optimized algorithm for finding the best path.
+* Lots of speed ups, shouldn't cause FPS drop anymore.
+* Walking between zones added.
+* Automaking of roads removed.
+
+Version 1.0
+* No notes

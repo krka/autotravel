@@ -1,0 +1,19 @@
+<Bindings>
+<Binding name = "AUTOTRAVEL_ADD_POINT" header = "AUTOTRAVEL" >
+AutoTravel_AddCurrentPoint()
+</Binding>
+<Binding name = "AUTOTRAVEL_PAUSE_RESUME">
+AutoTravel_Pause_Resume()
+</Binding>
+<Binding name = "AUTOTRAVEL_TOGGLE_UI">
+AutoTravel_ToggleVisible()
+</Binding>
+<Binding name = "AUTOTRAVEL_TOGGLE_MAP">
+AutoTravel_ToggleMapVisible()
+</Binding>
+
+<Binding name = "AUTOTRAVEL_SHOW_POI_MENU">
+AutoTravel_Show_POI_Menu()
+</Binding>
+
+</Bindings>

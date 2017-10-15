@@ -1,0 +1,11 @@
+## Interface: 1500
+## Author: Kristofer Karlsson, krka@kth.se
+## Title: AutoTravel 3.5.6
+## Notes: Travel between different places automatically
+## Version : 3.5.6
+## SavedVariables: AutoTravelData
+## Dependencies: MapLibrary
+AutoTravel.xml
+Map.xml
+Lines.xml
+Points.xml

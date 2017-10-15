@@ -1,0 +1,463 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+
+  <Frame name="AutoTravel_MapFrame" toplevel="true" enableMouse="true" movable="true" parent="UIParent" hidden="true" resizable="true">
+    <Size>
+      <AbsDimension x="512" y="384"/>
+    </Size>
+    <Anchors>
+      <Anchor point="TOP">
+        <Offset>
+          <AbsDimension x="0" y="-104"/>
+	</Offset>
+      </Anchor>
+    </Anchors>
+    <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+      <BackgroundInsets>
+	<AbsInset left="5" right="5" top="5" bottom="5"/>
+      </BackgroundInsets>
+      <TileSize>
+	<AbsValue val="16"/>
+      </TileSize>
+      <EdgeSize>
+	<AbsValue val="16"/>
+      </EdgeSize>
+    </Backdrop>
+    <Layers>
+      <Layer level="ARTWORK">
+        <FontString name="AutoTravel_MapTitleText" inherits="GameFontHighlight" text="AutoTravel Map">
+          <Anchors>
+            <Anchor point="TOPLEFT" relativeTo="AutoTravel_MapFrame" relativePoint="TOPLEFT">
+              <Offset>
+                <AbsDimension x="15" y="-10"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+
+    <Scripts>
+      <OnMouseDown>AutoTravel_MapFrame_StartMove(arg1);</OnMouseDown>
+      <OnMouseUp>AutoTravel_MapFrame_StopMove(arg1);</OnMouseUp>
+    </Scripts>
+
+    <Frames>
+      <Button name="AutoTravel_MapFrameCloseButton" inherits="UIPanelCloseButton">
+        <Anchors>
+          <Anchor point="TOPRIGHT" relativeTo="AutoTravel_MapFrame" relativePoint="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="0" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+      </Button>
+
+      <Checkbutton name="AutoTravel_MapFrame_AlwaysVisible">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="-170" y="-14"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer level="ARTWORK">
+            <FontString name="$parentLabel" inherits="GameFontNormalSmall">
+              <Anchors>
+                <Anchor point="LEFT" relativePoint="RIGHT">
+                  <Offset>
+                    <AbsDimension x="1" y="1"/>
+                  </Offset>
+                </Anchor>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnClick>AutoTravel_ToggleAlwaysFollow()</OnClick>
+        </Scripts>
+        <NormalTexture file="Interface\Buttons\UI-CheckBox-Up"/>
+        <PushedTexture file="Interface\Buttons\UI-CheckBox-Down"/>
+        <HighlightTexture file="Interface\Buttons\UI-CheckBox-Highlight" alphaMode="ADD"/>
+        <CheckedTexture file="Interface\Buttons\UI-CheckBox-Check"/>
+        <DisabledCheckedTexture file="Interface\Buttons\UI-CheckBox-Check-Disabled"/>
+      </Checkbutton>
+
+      <Frame name="AutoTravel_MapFrame_ContinentDropDown" inherits="UIDropDownMenuTemplate" enableMouse="true">
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="-165" y="-28"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnShow> AutoTravel_MapFrame_ContinentDropDown_OnShow(); </OnShow>
+        </Scripts>
+      </Frame>
+ 
+      <Frame name="AutoTravel_MapFrame_ZoneDropDown" inherits="UIDropDownMenuTemplate" enableMouse="true">
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="-10" y="-28"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Scripts>
+          <OnShow> AutoTravel_MapFrame_ZoneDropDown_OnShow(); </OnShow>
+        </Scripts>
+      </Frame>
+ 
+      <Button name="AutoTravel_MapFrame_VertScrollBar">
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+          <BackgroundInsets>
+            <AbsInset left="5" right="5" top="5" bottom="5"/>
+          </BackgroundInsets>
+          <TileSize>
+	    <AbsValue val="16"/>
+          </TileSize>
+          <EdgeSize>
+            <AbsValue val="16"/>
+          </EdgeSize>
+        </Backdrop>
+
+        <Anchors>
+          <Anchor point="TOPRIGHT">
+            <Offset>
+              <AbsDimension x="-3" y="-60"/>
+            </Offset>
+          </Anchor>
+          <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT">
+            <Offset>
+              <AbsDimension x="-22" y="24"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+
+        <Frames>
+          <Button name="AutoTravel_MapFrame_VertScrollBarSlider" alpha="0.5">
+            <Layers>
+              <Layer level="OVERLAY">
+                <Texture name="$parentTexture" file="Interface\Addons\AutoTravel\road-path">
+                  <Anchors>
+                    <Anchor point="TOPLEFT">
+                      <Offset>
+                        <AbsDimension x="6" y="-6"/>
+                     </Offset>
+                    </Anchor>
+                    <Anchor point="BOTTOMRIGHT">
+                      <Offset>
+                        <AbsDimension x="-6" y="6"/>
+                      </Offset>
+                    </Anchor>
+                  </Anchors>
+                </Texture>
+              </Layer>
+            </Layers>
+
+            <Anchors>
+              <Anchor point="TOPLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="0"/>
+               </Offset>
+              </Anchor>
+              <Anchor point="BOTTOMRIGHT">
+                <Offset>
+                  <AbsDimension x="0" y="0"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Scripts>
+              <OnEnter>this:SetAlpha(1);</OnEnter>
+              <OnLeave>this:SetAlpha(0.5);</OnLeave>
+              <OnMouseDown> if arg1 == "LeftButton" then AutoTravel_MapFrame_VertDrag = 1; end </OnMouseDown>
+              <OnMouseUp> if arg1 == "LeftButton" then AutoTravel_MapFrame_VertDrag = nil; AutoTravel_MapFrame_VertDragStartY = nil; end </OnMouseUp>
+            </Scripts>
+          </Button>
+        </Frames>
+      </Button>
+
+      <Button name="AutoTravel_MapFrame_HoriScrollBar">
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+          <BackgroundInsets>
+            <AbsInset left="5" right="5" top="5" bottom="5"/>
+          </BackgroundInsets>
+          <TileSize>
+	    <AbsValue val="16"/>
+          </TileSize>
+          <EdgeSize>
+            <AbsValue val="16"/>
+          </EdgeSize>
+        </Backdrop>
+
+        <Anchors>
+          <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT">
+            <Offset>
+              <AbsDimension x="-24" y="24"/>
+            </Offset>
+          </Anchor>
+          <Anchor point="BOTTOMLEFT">
+            <Offset>
+              <AbsDimension x="6" y="3"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+
+        <Frames>
+          <Button name="AutoTravel_MapFrame_HoriScrollBarSlider" alpha="0.5">
+            <Layers>
+              <Layer level="OVERLAY">
+                <Texture name="$parentTexture" file="Interface\Addons\AutoTravel\road-path">
+                  <Anchors>
+                    <Anchor point="TOPLEFT">
+                      <Offset>
+                        <AbsDimension x="6" y="-6"/>
+                     </Offset>
+                    </Anchor>
+                    <Anchor point="BOTTOMRIGHT">
+                      <Offset>
+                        <AbsDimension x="-6" y="6"/>
+                      </Offset>
+                    </Anchor>
+                  </Anchors>
+                </Texture>
+              </Layer>
+            </Layers>
+
+            <Anchors>
+              <Anchor point="TOPLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="0"/>
+               </Offset>
+              </Anchor>
+              <Anchor point="BOTTOMRIGHT">
+                <Offset>
+                  <AbsDimension x="0" y="0"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Scripts>
+              <OnEnter>this:SetAlpha(1);</OnEnter>
+              <OnLeave>this:SetAlpha(0.5);</OnLeave>
+              <OnMouseDown> if arg1 == "LeftButton" then AutoTravel_MapFrame_HoriDrag = 1; end </OnMouseDown>
+              <OnMouseUp> if arg1 == "LeftButton" then AutoTravel_MapFrame_HoriDrag = nil; AutoTravel_MapFrame_HoriDragStartX = nil; end </OnMouseUp>
+            </Scripts>
+          </Button>
+        </Frames>
+      </Button>
+
+     <Button name="AutoTravel_MapFrameResize" alpha="0.5">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+        <Anchors>
+          <Anchor point="BOTTOMRIGHT">
+            <Offset>
+              <AbsDimension x="-4" y="4"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer level="ARTWORK">
+            <Texture name="$parentIcon" file="Interface\Addons\AutoTravel\resize-icon" />
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnEnter>this:SetAlpha(1);</OnEnter>
+          <OnLeave>this:SetAlpha(0.5);</OnLeave>
+          <OnMouseDown>if arg1 == "LeftButton" then AutoTravel_MapFrame_IsResizing = 1; AutoTravel_MapFrame:StartSizing("BOTTOMRIGHT"); end</OnMouseDown>
+          <OnMouseUp>if arg1 == "LeftButton" then AutoTravel_MapFrame_IsResizing = nil; AutoTravel_MapFrame:StopMovingOrSizing(); AutoTravel_SetOffset(); end</OnMouseUp>
+        </Scripts>
+     </Button>
+
+     <Button name="AutoTravel_MapFrameContent" alpha="1">
+       <Anchors>
+         <Anchor point="BOTTOMRIGHT">
+           <Offset>
+             <AbsDimension x="-24" y="24"/>
+           </Offset>
+         </Anchor>
+         <Anchor point="TOPLEFT">
+           <Offset>
+             <AbsDimension x="6" y="-60"/>
+           </Offset>
+         </Anchor>
+       </Anchors>
+
+       <Layers>
+         <Layer level="BACKGROUND">
+           <Texture name="$parentMain1" />
+           <Texture name="$parentMain2" />
+           <Texture name="$parentMain3" />
+           <Texture name="$parentMain4" />
+           <Texture name="$parentMain5" />
+           <Texture name="$parentMain6" />
+           <Texture name="$parentMain7" />
+           <Texture name="$parentMain8" />
+           <Texture name="$parentMain9" />
+           <Texture name="$parentMain10" />
+           <Texture name="$parentMain11" />
+           <Texture name="$parentMain12" />
+         </Layer>
+         <Layer level="ARTWORK">
+           <Texture name="$parentOverlay1" hidden="true"/>
+           <Texture name="$parentOverlay2" hidden="true"/>
+           <Texture name="$parentOverlay3" hidden="true"/>
+           <Texture name="$parentOverlay4" hidden="true"/>
+           <Texture name="$parentOverlay5" hidden="true"/>
+           <Texture name="$parentOverlay6" hidden="true"/>
+           <Texture name="$parentOverlay7" hidden="true"/>
+           <Texture name="$parentOverlay8" hidden="true"/>
+           <Texture name="$parentOverlay9" hidden="true"/>
+           <Texture name="$parentOverlay10" hidden="true"/>
+           <Texture name="$parentOverlay11" hidden="true"/>
+           <Texture name="$parentOverlay12" hidden="true"/>
+           <Texture name="$parentOverlay13" hidden="true"/>
+           <Texture name="$parentOverlay14" hidden="true"/>
+           <Texture name="$parentOverlay15" hidden="true"/>
+           <Texture name="$parentOverlay16" hidden="true"/>
+           <Texture name="$parentOverlay17" hidden="true"/>
+           <Texture name="$parentOverlay18" hidden="true"/>
+           <Texture name="$parentOverlay19" hidden="true"/>
+           <Texture name="$parentOverlay20" hidden="true"/>
+           <Texture name="$parentOverlay21" hidden="true"/>
+           <Texture name="$parentOverlay22" hidden="true"/>
+           <Texture name="$parentOverlay23" hidden="true"/>
+           <Texture name="$parentOverlay24" hidden="true"/>
+           <Texture name="$parentOverlay25" hidden="true"/>
+           <Texture name="$parentOverlay26" hidden="true"/>
+           <Texture name="$parentOverlay27" hidden="true"/>
+           <Texture name="$parentOverlay28" hidden="true"/>
+           <Texture name="$parentOverlay29" hidden="true"/>
+           <Texture name="$parentOverlay30" hidden="true"/>
+           <Texture name="$parentOverlay31" hidden="true"/>
+           <Texture name="$parentOverlay32" hidden="true"/>
+           <Texture name="$parentOverlay33" hidden="true"/>
+           <Texture name="$parentOverlay34" hidden="true"/>
+           <Texture name="$parentOverlay35" hidden="true"/>
+           <Texture name="$parentOverlay36" hidden="true"/>
+           <Texture name="$parentOverlay37" hidden="true"/>
+           <Texture name="$parentOverlay38" hidden="true"/>
+           <Texture name="$parentOverlay39" hidden="true"/>
+           <Texture name="$parentOverlay40" hidden="true"/>
+         </Layer>
+       </Layers>
+
+       <Scripts>
+         <OnMouseDown> AutoTravel_MapFrame_OnMouseDown(arg1) </OnMouseDown>
+         <OnMouseUp> AutoTravel_MapFrame_OnMouseUp(arg1) </OnMouseUp>
+         <OnMouseWheel> AutoTravel_MapFrame_OnMouseWheel(arg1) </OnMouseWheel>
+         <OnUpdate> AutoTravel_MapFrame_OnUpdate() </OnUpdate>
+       </Scripts>
+     </Button>
+
+     <Frame name="AutoTravel_MapFrameContentPlayer">
+        <Size>
+          <AbsDimension x="16" y="16"/>
+        </Size>
+        <Anchors>
+          <Anchor point="CENTER"/>
+        </Anchors>
+        <Layers>
+          <Layer level="OVERLAY">
+            <Texture name="$parentIcon" file="Interface\WorldMap\WorldMapPlayerIcon" />
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnLoad>this:SetFrameLevel(this:GetFrameLevel() + 2);</OnLoad>
+        </Scripts>
+      </Frame>
+
+     <Frame name="AutoTravel_MapFrameContentParty1">
+       <Size>
+         <AbsDimension x="16" y="16"/>
+       </Size>
+       <Anchors>
+         <Anchor point="CENTER"/>
+       </Anchors>
+       <Layers>
+         <Layer level="OVERLAY">
+           <Texture file="Interface\WorldMap\WorldMapPartyIcon" />
+         </Layer>
+       </Layers>
+       <Scripts>
+         <OnLoad>this:SetFrameLevel(this:GetFrameLevel() + 2);</OnLoad>
+       </Scripts>
+     </Frame>
+
+     <Frame name="AutoTravel_MapFrameContentParty2">
+       <Size>
+         <AbsDimension x="16" y="16"/>
+       </Size>
+       <Anchors>
+         <Anchor point="CENTER"/>
+       </Anchors>
+       <Layers>
+         <Layer level="OVERLAY">
+           <Texture file="Interface\WorldMap\WorldMapPartyIcon" />
+         </Layer>
+       </Layers>
+       <Scripts>
+         <OnLoad>this:SetFrameLevel(this:GetFrameLevel() + 2);</OnLoad>
+       </Scripts>
+     </Frame>
+
+     <Frame name="AutoTravel_MapFrameContentParty3">
+       <Size>
+         <AbsDimension x="16" y="16"/>
+       </Size>
+       <Anchors>
+         <Anchor point="CENTER"/>
+       </Anchors>
+       <Layers>
+         <Layer level="OVERLAY">
+           <Texture file="Interface\WorldMap\WorldMapPartyIcon" />
+         </Layer>
+       </Layers>
+       <Scripts>
+         <OnLoad>this:SetFrameLevel(this:GetFrameLevel() + 2);</OnLoad>
+       </Scripts>
+     </Frame>
+
+     <Frame name="AutoTravel_MapFrameContentParty4">
+       <Size>
+         <AbsDimension x="16" y="16"/>
+       </Size>
+       <Anchors>
+         <Anchor point="CENTER"/>
+       </Anchors>
+       <Layers>
+         <Layer level="OVERLAY">
+           <Texture file="Interface\WorldMap\WorldMapPartyIcon" />
+         </Layer>
+       </Layers>
+       <Scripts>
+         <OnLoad>this:SetFrameLevel(this:GetFrameLevel() + 2);</OnLoad>
+       </Scripts>
+     </Frame>
+
+     <Frame name="AutoTravel_MapFrameContentPlayerCorpse">
+        <Size>
+          <AbsDimension x="16" y="16"/>
+        </Size>
+        <Anchors>
+          <Anchor point="CENTER"/>
+        </Anchors>
+        <Layers>
+          <Layer level="OVERLAY">
+            <Texture file="Interface\Minimap\POIIcons" setAllPoints="true">
+              <TexCoords left="0.75" right="1.0" top="0.25" bottom="0.5"/>
+            </Texture>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnLoad>this:SetFrameLevel(this:GetFrameLevel() + 2);</OnLoad>
+        </Scripts>
+      </Frame>
+    </Frames>
+  </Frame>
+</Ui>

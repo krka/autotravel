@@ -1,0 +1,8 @@
+## Interface: 1300
+## Author: Kristofer Karlsson, krka@kth.se
+## Title: AutoTravelEmote 1.0.1
+## Notes: Adds emotes to AutoTravel
+## Version : 1.0.1
+## Dependencies: AutoTravel
+## DefaultState: disabled
+AutoTravelEmote.xml
